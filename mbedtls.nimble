@@ -14,7 +14,4 @@ license       = "MIT or Apache License 2.0"
 
 before install:
   exec "git submodule update --init"
-  when defined(windows):
-    exec "mingw32-make"
-  else:
-    exec "make"
+  exec "make -C mbedtls/csources"
