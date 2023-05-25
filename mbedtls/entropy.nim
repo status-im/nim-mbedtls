@@ -1,3 +1,4 @@
+import "csources"
 import "md"
 
 {.compile: "./mbedtls/csources/library/entropy.c".}
@@ -9,8 +10,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ENTROPY_BLOCK_SIZE* = 64

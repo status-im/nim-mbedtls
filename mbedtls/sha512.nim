@@ -1,3 +1,4 @@
+import "csources"
 import "platform_time"
 
 {.compile: "./mbedtls/csources/library/sha512.c".}
@@ -5,8 +6,6 @@ import "platform_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_SHA512_BAD_INPUT_DATA* = -0x00000075

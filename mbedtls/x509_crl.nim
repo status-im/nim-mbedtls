@@ -1,3 +1,4 @@
+import "csources"
 import "x509"
 import "pk"
 import "md"
@@ -7,8 +8,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 type
   mbedtls_x509_crl_entry* {.bycopy.} = object

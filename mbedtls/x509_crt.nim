@@ -1,3 +1,4 @@
+import "csources"
 import "x509"
 import "x509_crl"
 import "asn1"
@@ -15,8 +16,6 @@ import "pk"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_X509_CRT_VERSION_1* = 0

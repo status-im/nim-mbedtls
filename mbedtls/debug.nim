@@ -1,3 +1,4 @@
+import "csources"
 import "ssl"
 import "bignum"
 import "ecp"
@@ -10,8 +11,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_debug_ecdh_attr)
 

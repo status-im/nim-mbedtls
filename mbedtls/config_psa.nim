@@ -1,8 +1,7 @@
+import "csources"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_PSA_BUILTIN_ALG_HMAC* = 1

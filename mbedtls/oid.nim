@@ -1,3 +1,4 @@
+import "csources"
 import "asn1"
 import "pk"
 import "md"
@@ -159,8 +160,6 @@ import "cipher"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_OID_NOT_FOUND* = -0x0000002E

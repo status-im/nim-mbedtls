@@ -1,3 +1,4 @@
+import "csources"
 import "platform_time"
 
 {.compile: "./mbedtls/csources/library/aes.c".}
@@ -6,8 +7,6 @@ import "platform_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_AES_ENCRYPT* = 1

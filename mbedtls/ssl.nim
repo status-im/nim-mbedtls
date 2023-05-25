@@ -1,3 +1,4 @@
+import "csources"
 import "ssl_ciphersuites"
 import "platform_time"
 import "bignum"
@@ -37,8 +38,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_ssl_states)
 defineEnum(mbedtls_ssl_protocol_version)

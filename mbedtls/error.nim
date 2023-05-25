@@ -1,3 +1,4 @@
+import "csources"
 {.compile: "./mbedtls/csources/library/error.c".}
 
 # proc 'mbedtls_error_add' skipped - static inline procs cannot work with '--noHeader | -H'
@@ -5,8 +6,6 @@
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_ERROR_GENERIC_ERROR* = -0x00000001

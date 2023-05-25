@@ -1,3 +1,4 @@
+import "csources"
 import "md"
 import "utils"
 
@@ -8,8 +9,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_mpi_gen_prime_flag_t)
 

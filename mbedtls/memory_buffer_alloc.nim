@@ -1,10 +1,9 @@
+import "csources"
 {.compile: "./mbedtls/csources/library/memory_buffer_alloc.c".}
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_MEMORY_ALIGN_MULTIPLE* = 4

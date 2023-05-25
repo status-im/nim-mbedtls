@@ -1,11 +1,10 @@
+import "csources"
 import "cipher"
 import "utils"
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_nist_kw_mode_t)
 

@@ -1,3 +1,4 @@
+import "csources"
 import "ctr_drbg"
 import "pkcs5"
 import "pkcs12"
@@ -17,8 +18,6 @@ import "psa/crypto_types"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 type
   mbedtls_f_rng_t* = proc (p_rng: pointer; output: ptr byte; output_size: uint): cint {.

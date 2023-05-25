@@ -1,10 +1,8 @@
+import "../csources"
+
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
-{.pragma: impcrypto_configHdr,
-  header: "/home/lchenut/minnim/webrtc/mbedtls/include/psa/crypto_config.h".}
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   PSA_WANT_ALG_CBC_NO_PADDING* = 1

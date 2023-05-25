@@ -1,3 +1,4 @@
+import "csources"
 import "platform_time"
 
 {.compile: "./mbedtls/csources/library/platform.c".}
@@ -29,8 +30,6 @@ import "platform_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_PLATFORM_STD_NV_SEED_FILE* = "seedfile"

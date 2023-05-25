@@ -1,3 +1,4 @@
+import "csources"
 {.used.}
 {.compile: "./mbedtls/csources/library/platform_util.c".}
 
@@ -8,8 +9,6 @@ import std/time_t as std_time_t
 type time_t* = std_time_t.Time
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 type
   mbedtls_time_t* = time_t

@@ -1,3 +1,4 @@
+import "csources"
 import "ecp"
 import "bignum"
 import "md"
@@ -9,8 +10,6 @@ import "asn1write"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 type
   mbedtls_ecdsa_context* = mbedtls_ecp_keypair

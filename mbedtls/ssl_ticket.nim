@@ -1,3 +1,4 @@
+import "csources"
 import "ssl"
 import "platform_time"
 import "ssl_ciphersuites"
@@ -8,8 +9,6 @@ import "cipher"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_SSL_TICKET_MAX_KEY_BYTES* = 32

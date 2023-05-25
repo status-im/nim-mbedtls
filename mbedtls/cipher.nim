@@ -1,3 +1,4 @@
+import "csources"
 import "aes"
 import "aria"
 import "camellia"
@@ -32,8 +33,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_cipher_id_t)
 defineEnum(mbedtls_cipher_type_t)

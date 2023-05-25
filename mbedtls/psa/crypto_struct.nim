@@ -1,3 +1,4 @@
+import "../csources"
 import "crypto_types"
 {.compile: "./mbedtls/csources/library/psa_crypto_client.c".}
 
@@ -15,11 +16,7 @@ import "crypto_types"
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
-{.pragma: impcrypto_structHdr,
-  header: "/home/lchenut/minnim/webrtc/mbedtls/include/psa/crypto_struct.h".}
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   PSA_MAX_KEY_BITS* = 0x0000FFF8
@@ -29,57 +26,46 @@ const
       typeof(MBEDTLS_PSA_KA_FLAG_HAS_SLOT_NUMBER)(0))
   MBEDTLS_PSA_KA_MASK_DUAL_USE* = (0)
 
-proc psa_hash_operation_init*(): psa_hash_operation_s {.importc, cdecl,
-    impcrypto_structHdr.}
-proc psa_cipher_operation_init*(): psa_cipher_operation_s {.importc, cdecl,
-    impcrypto_structHdr.}
-proc psa_mac_operation_init*(): psa_mac_operation_s {.importc, cdecl,
-    impcrypto_structHdr.}
-proc psa_aead_operation_init*(): psa_aead_operation_s {.importc, cdecl,
-    impcrypto_structHdr.}
+proc psa_hash_operation_init*(): psa_hash_operation_s {.importc, cdecl.}
+proc psa_cipher_operation_init*(): psa_cipher_operation_s {.importc, cdecl.}
+proc psa_mac_operation_init*(): psa_mac_operation_s {.importc, cdecl.}
+proc psa_aead_operation_init*(): psa_aead_operation_s {.importc, cdecl.}
 proc psa_key_derivation_operation_init*(): psa_key_derivation_s {.importc,
-    cdecl, impcrypto_structHdr.}
-proc psa_key_policy_init*(): psa_key_policy_s {.importc, cdecl,
-    impcrypto_structHdr.}
-proc psa_key_attributes_init*(): psa_key_attributes_s {.importc, cdecl,
-    impcrypto_structHdr.}
+    cdecl.}
+proc psa_key_policy_init*(): psa_key_policy_s {.importc, cdecl.}
+proc psa_key_attributes_init*(): psa_key_attributes_s {.importc, cdecl.}
 proc psa_set_key_id*(attributes: ptr psa_key_attributes_t;
-                     key: mbedtls_svc_key_id_t) {.importc, cdecl,
-    impcrypto_structHdr.}
+                     key: mbedtls_svc_key_id_t) {.importc, cdecl.}
 proc psa_get_key_id*(attributes: ptr psa_key_attributes_t): mbedtls_svc_key_id_t {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_set_key_lifetime*(attributes: ptr psa_key_attributes_t;
-                           lifetime: psa_key_lifetime_t) {.importc, cdecl,
-    impcrypto_structHdr.}
+                           lifetime: psa_key_lifetime_t) {.importc, cdecl.}
 proc psa_get_key_lifetime*(attributes: ptr psa_key_attributes_t): psa_key_lifetime_t {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_extend_key_usage_flags*(usage_flags: ptr psa_key_usage_t) {.importc,
-    cdecl, impcrypto_structHdr.}
+    cdecl.}
 proc psa_set_key_usage_flags*(attributes: ptr psa_key_attributes_t;
-                              usage_flags: psa_key_usage_t) {.importc, cdecl,
-    impcrypto_structHdr.}
+                              usage_flags: psa_key_usage_t) {.importc, cdecl.}
 proc psa_get_key_usage_flags*(attributes: ptr psa_key_attributes_t): psa_key_usage_t {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_set_key_algorithm*(attributes: ptr psa_key_attributes_t;
-                            alg: psa_algorithm_t) {.importc, cdecl,
-    impcrypto_structHdr.}
+                            alg: psa_algorithm_t) {.importc, cdecl.}
 proc psa_get_key_algorithm*(attributes: ptr psa_key_attributes_t): psa_algorithm_t {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_set_key_domain_parameters*(attributes: ptr psa_key_attributes_t;
                                     `type`: psa_key_type_t; data: ptr uint8;
                                     data_length: uint): psa_status_t {.importc,
-    cdecl, impcrypto_structHdr.}
+    cdecl.}
 proc psa_set_key_type*(attributes: ptr psa_key_attributes_t;
-                       `type`: psa_key_type_t) {.importc, cdecl,
-    impcrypto_structHdr.}
+                       `type`: psa_key_type_t) {.importc, cdecl.}
 proc psa_get_key_type*(attributes: ptr psa_key_attributes_t): psa_key_type_t {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_set_key_bits*(attributes: ptr psa_key_attributes_t; bits: uint) {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_get_key_bits*(attributes: ptr psa_key_attributes_t): uint {.importc,
-    cdecl, impcrypto_structHdr.}
+    cdecl.}
 proc psa_sign_hash_interruptible_operation_init*(): psa_sign_hash_interruptible_operation_s {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 proc psa_verify_hash_interruptible_operation_init*(): psa_verify_hash_interruptible_operation_s {.
-    importc, cdecl, impcrypto_structHdr.}
+    importc, cdecl.}
 {.pop.}

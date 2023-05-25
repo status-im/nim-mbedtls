@@ -1,3 +1,4 @@
+import "../csources"
 # const 'PSA_MAC_MAX_SIZE' has unsupported value 'PSA_HASH_MAX_SIZE'
 # const 'PSA_VENDOR_ECDSA_SIGNATURE_MAX_SIZE' has unsupported value 'PSA_ECDSA_SIGNATURE_SIZE(PSA_VENDOR_ECC_MAX_CURVE_BITS)'
 # const 'PSA_SIGNATURE_MAX_SIZE' has unsupported value '(PSA_BITS_TO_BYTES(PSA_VENDOR_RSA_MAX_KEY_BITS) > PSA_VENDOR_ECDSA_SIGNATURE_MAX_SIZE ? PSA_BITS_TO_BYTES(PSA_VENDOR_RSA_MAX_KEY_BITS) : PSA_VENDOR_ECDSA_SIGNATURE_MAX_SIZE)'
@@ -9,11 +10,7 @@
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
-{.pragma: impcrypto_sizesHdr,
-  header: "/home/lchenut/minnim/webrtc/mbedtls/include/psa/crypto_sizes.h".}
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   PSA_HASH_MAX_SIZE* = 64

@@ -1,3 +1,4 @@
+import "csources"
 import "ssl"
 import "md"
 
@@ -6,8 +7,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_SSL_COOKIE_TIMEOUT* = 60

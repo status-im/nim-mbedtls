@@ -1,3 +1,4 @@
+import "csources"
 import "bignum"
 
 {.compile: "./mbedtls/csources/library/asn1parse.c".}
@@ -5,8 +6,6 @@ import "bignum"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_ASN1_OUT_OF_DATA* = -0x00000060

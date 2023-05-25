@@ -1,3 +1,4 @@
+import "csources"
 import "ssl"
 import "platform_time"
 
@@ -6,8 +7,6 @@ import "platform_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_SSL_CACHE_DEFAULT_TIMEOUT* = 86400

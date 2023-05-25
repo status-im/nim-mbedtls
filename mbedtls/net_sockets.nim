@@ -1,10 +1,9 @@
+import "csources"
 {.compile: "./mbedtls/csources/library/net_sockets.c".}
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_NET_SOCKET_FAILED* = -0x00000042

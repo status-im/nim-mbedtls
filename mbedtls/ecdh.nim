@@ -1,3 +1,4 @@
+import "csources"
 import "ecp"
 import "bignum"
 import "utils"
@@ -7,8 +8,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_ecdh_side)
 defineEnum(mbedtls_ecdh_variant)

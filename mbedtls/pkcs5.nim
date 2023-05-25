@@ -1,3 +1,4 @@
+import "csources"
 import "asn1"
 import "md"
 import "cipher"
@@ -9,8 +10,6 @@ import "rsa"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA* = -0x00002F80

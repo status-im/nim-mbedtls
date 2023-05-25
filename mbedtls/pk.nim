@@ -1,3 +1,4 @@
+import "csources"
 import "pem"
 import "md"
 import "ecdsa"
@@ -18,8 +19,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_pk_type_t)
 defineEnum(mbedtls_pk_debug_type)

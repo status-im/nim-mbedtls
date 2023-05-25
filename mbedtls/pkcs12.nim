@@ -1,3 +1,4 @@
+import "csources"
 import "md"
 import "platform_time"
 import "cipher"
@@ -10,8 +11,6 @@ import "hash_info"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_PKCS12_BAD_INPUT_DATA* = -0x00001F80

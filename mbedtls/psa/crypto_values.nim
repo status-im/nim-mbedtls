@@ -1,3 +1,4 @@
+import "../csources"
 import "crypto_types"
 
 # const 'PSA_ERROR_GENERIC_ERROR' has unsupported value '((psa_status_t)-132)'
@@ -28,11 +29,7 @@ import "crypto_types"
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
-{.pragma: impcrypto_valuesHdr,
-  header: "/home/lchenut/minnim/webrtc/mbedtls/include/psa/crypto_values.h".}
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   PSA_SUCCESS* = (cast[psa_status_t](0))
@@ -190,10 +187,10 @@ const
   PSA_KEY_DERIVATION_INPUT_SEED* = (cast[psa_key_derivation_step_t](0x00000204))
   PSA_KEY_DERIVATION_INPUT_COST* = (cast[psa_key_derivation_step_t](0x00000205))
 proc mbedtls_svc_key_id_make*(unused: cuint; key_id: psa_key_id_t): mbedtls_svc_key_id_t {.
-    importc, cdecl, impcrypto_valuesHdr.}
+    importc, cdecl.}
 proc mbedtls_svc_key_id_equal*(id1: mbedtls_svc_key_id_t;
                                id2: mbedtls_svc_key_id_t): cint {.importc,
-    cdecl, impcrypto_valuesHdr.}
+    cdecl.}
 proc mbedtls_svc_key_id_is_null*(key: mbedtls_svc_key_id_t): cint {.importc,
-    cdecl, impcrypto_valuesHdr.}
+    cdecl.}
 {.pop.}

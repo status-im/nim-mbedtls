@@ -1,3 +1,4 @@
+import "csources"
 import "hash_info"
 import "bignum"
 import "md"
@@ -9,8 +10,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_RSA_BAD_INPUT_DATA* = -0x00004080

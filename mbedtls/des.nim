@@ -1,3 +1,4 @@
+import "csources"
 import "platform_time"
 
 {.compile: "./mbedtls/csources/library/des.c".}
@@ -5,8 +6,6 @@ import "platform_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_DES_ENCRYPT* = 1

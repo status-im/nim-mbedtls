@@ -1,3 +1,4 @@
+import "csources"
 import "ecp"
 import "bignum"
 import "md"
@@ -10,8 +11,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_ecjpake_role)
 

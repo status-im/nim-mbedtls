@@ -1,3 +1,4 @@
+import "csources"
 import "asn1"
 import "bignum"
 
@@ -6,8 +7,6 @@ import "bignum"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 proc mbedtls_asn1_write_len*(p: ptr ptr byte; start: ptr byte; len: uint): cint {.
     importc, cdecl.}

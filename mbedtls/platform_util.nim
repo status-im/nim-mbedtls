@@ -1,3 +1,4 @@
+import "csources"
 import "platform_time"
 
 # const 'MBEDTLS_CHECK_RETURN' has unsupported value '__attribute__((__warn_unused_result__))'
@@ -6,8 +7,6 @@ import "platform_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 type tm {.importc: "struct tm", header: "<time.h>".} = object
 

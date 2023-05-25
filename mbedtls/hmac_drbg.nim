@@ -1,3 +1,4 @@
+import "csources"
 import "md"
 
 {.compile: "./mbedtls/csources/library/hmac_drbg.c".}
@@ -5,8 +6,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_HMAC_DRBG_REQUEST_TOO_BIG* = -0x00000003

@@ -1,3 +1,4 @@
+import "csources"
 import "asn1"
 import "pem"
 import "bignum"
@@ -25,8 +26,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_dhm_parameter)
 

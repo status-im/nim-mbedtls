@@ -1,3 +1,4 @@
+import "csources"
 import "md"
 
 {.compile: "./mbedtls/csources/library/hkdf.c".}
@@ -5,8 +6,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_HKDF_BAD_INPUT_DATA* = -0x00005F80

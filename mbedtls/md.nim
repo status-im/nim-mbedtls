@@ -1,3 +1,4 @@
+import "csources"
 import "ripemd160"
 import "sha1"
 import "sha256"
@@ -10,8 +11,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_md_type_t)
 defineEnum(mbedtls_md_engine_t)

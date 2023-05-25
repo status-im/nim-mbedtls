@@ -1,3 +1,4 @@
+import "csources"
 import "constant_time"
 
 {.compile: "./mbedtls/csources/library/base64.c".}
@@ -5,8 +6,6 @@ import "constant_time"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL* = -0x0000002A

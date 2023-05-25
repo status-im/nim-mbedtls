@@ -1,3 +1,4 @@
+import "csources"
 import "poly1305"
 import "chacha20"
 import "utils"
@@ -7,8 +8,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_chachapoly_mode_t)
 

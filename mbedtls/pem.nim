@@ -1,3 +1,4 @@
+import "csources"
 import "aes"
 import "base64"
 import "des"
@@ -9,8 +10,6 @@ import "des"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT* = -0x00001080

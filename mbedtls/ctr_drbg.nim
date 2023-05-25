@@ -1,3 +1,4 @@
+import "csources"
 import "aes"
 import "entropy"
 # TODO: Remove entropy, it's not used in this file.
@@ -7,8 +8,6 @@ import "entropy"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED* = -0x00000034

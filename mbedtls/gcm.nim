@@ -1,10 +1,9 @@
+import "csources"
 import "cipher"
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_GCM_ENCRYPT* = 1

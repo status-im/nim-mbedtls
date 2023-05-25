@@ -1,3 +1,4 @@
+import "csources"
 import "asn1"
 import "pk"
 import "md"
@@ -27,8 +28,6 @@ import "md"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_X509_MAX_INTERMEDIATE_CA* = 8

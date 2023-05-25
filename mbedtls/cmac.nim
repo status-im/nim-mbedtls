@@ -1,3 +1,4 @@
+import "csources"
 import "cipher"
 
 {.compile: "./mbedtls/csources/library/cmac.c".}
@@ -5,8 +6,6 @@ import "cipher"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 const
   MBEDTLS_AES_BLOCK_SIZE* = 16

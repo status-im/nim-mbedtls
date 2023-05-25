@@ -1,3 +1,4 @@
+import "csources"
 import "asn1"
 import "x509"
 import "x509_crt"
@@ -9,8 +10,6 @@ import "utils"
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
 {.experimental: "codeReordering".}
-{.passc: "-I./mbedtls/csources/include".}
-{.passc: "-I./mbedtls/csources/library".}
 
 defineEnum(mbedtls_pkcs7_type)
 
