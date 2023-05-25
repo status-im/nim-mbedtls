@@ -1,7 +1,6 @@
 import "csources"
 import "aes"
 import "entropy"
-# TODO: Remove entropy, it's not used in this file.
 
 {.compile: "./mbedtls/csources/library/ctr_drbg.c".}
 

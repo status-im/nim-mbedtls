@@ -2,7 +2,6 @@ import "csources"
 import "ecp"
 import "bignum"
 import "md"
-import "hash_info"
 import "platform_time"
 import "utils"
 

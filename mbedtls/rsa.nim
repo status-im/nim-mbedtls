@@ -1,5 +1,4 @@
 import "csources"
-import "hash_info"
 import "bignum"
 import "md"
 

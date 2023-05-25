@@ -1,6 +1,5 @@
 import "csources"
 import "bignum"
-# TODO: Remove bignum, it's not used in this file.
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 

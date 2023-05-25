@@ -4,7 +4,6 @@ import "platform_time"
 import "cipher"
 import "asn1"
 import "ctr_drbg"
-import "hash_info"
 
 {.compile: "./mbedtls/csources/library/pkcs12.c".}
 

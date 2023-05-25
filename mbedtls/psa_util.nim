@@ -2,8 +2,8 @@ import "csources"
 import "ctr_drbg"
 import "pkcs5"
 import "pkcs12"
-# TODO: Remove pkcs5 and pkcs12, they're not used in this file.
 import "psa/crypto_types"
+
 {.compile: "./mbedtls/csources/library/psa_util.c".}
 
 # proc 'mbedtls_psa_translate_cipher_type' skipped - static inline procs cannot work with '--noHeader | -H'
