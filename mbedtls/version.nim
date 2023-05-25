@@ -1,3 +1,4 @@
+{.used.}
 import "csources"
 {.compile: "./mbedtls/csources/library/version.c".}
 {.compile: "./mbedtls/csources/library/version_features.c".}

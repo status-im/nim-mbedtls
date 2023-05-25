@@ -1,3 +1,4 @@
+{.used.}
 import "csources"
 import "ripemd160"
 import "sha1"

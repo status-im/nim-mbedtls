@@ -1,3 +1,4 @@
+{.used.}
 import "../csources"
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}

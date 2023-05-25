@@ -1,3 +1,4 @@
+{.used.}
 import "../csources"
 # const 'MBEDTLS_PSA_HMAC_OPERATION_INIT' has unsupported value '{ 0, PSA_HASH_OPERATION_INIT, { 0 } }'
 # const 'MBEDTLS_PSA_MAC_OPERATION_INIT' has unsupported value '{ 0, { 0 } }'

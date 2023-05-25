@@ -1,3 +1,4 @@
+{.used.}
 import "csources"
 {.compile: "./mbedtls/csources/library/memory_buffer_alloc.c".}
 

@@ -1,3 +1,4 @@
+{.used.}
 import "../csources"
 # const 'PSA_MAC_MAX_SIZE' has unsupported value 'PSA_HASH_MAX_SIZE'
 # const 'PSA_VENDOR_ECDSA_SIGNATURE_MAX_SIZE' has unsupported value 'PSA_ECDSA_SIGNATURE_SIZE(PSA_VENDOR_ECC_MAX_CURVE_BITS)'

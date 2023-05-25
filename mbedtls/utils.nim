@@ -1,3 +1,4 @@
+{.used.}
 import macros
 
 macro defineEnum*(typ: untyped): untyped =

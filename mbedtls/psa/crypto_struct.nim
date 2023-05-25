@@ -1,3 +1,4 @@
+{.used.}
 import "../csources"
 import "crypto_types"
 {.compile: "./mbedtls/csources/library/psa_crypto_client.c".}

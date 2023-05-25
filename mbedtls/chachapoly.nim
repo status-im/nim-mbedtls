@@ -1,3 +1,4 @@
+{.used.}
 import "csources"
 import "poly1305"
 import "chacha20"

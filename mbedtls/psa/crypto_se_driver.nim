@@ -1,3 +1,4 @@
+{.used.}
 import "../csources"
 import "crypto_driver_common"
 import "crypto_types"
