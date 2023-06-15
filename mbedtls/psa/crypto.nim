@@ -20,7 +20,6 @@ import "../utils"
 {.compile: "./mbedtls/csources/library/psa_crypto_ecp.c".}
 {.compile: "./mbedtls/csources/library/psa_crypto_aead.c".}
 {.compile: "./mbedtls/csources/library/psa_crypto_cipher.c".}
-{.compile: "./mbedtls/csources/library/psa_crypto_ffdh.c".}
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 

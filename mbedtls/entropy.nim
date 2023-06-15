@@ -52,7 +52,7 @@ proc mbedtls_entropy_add_source*(ctx: ptr mbedtls_entropy_context;
 proc mbedtls_entropy_gather*(ctx: ptr mbedtls_entropy_context): cint {.importc,
     cdecl.}
 proc mbedtls_entropy_func*(data: pointer; output: ptr byte; len: uint): cint {.
-    importc, cdecl.}
+    importc, cdecl, gcsafe.}
 proc mbedtls_entropy_update_manual*(ctx: ptr mbedtls_entropy_context;
                                     data: ptr byte; len: uint): cint {.
     importc, cdecl.}
