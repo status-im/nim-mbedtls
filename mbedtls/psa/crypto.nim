@@ -30,70 +30,6 @@ defineEnum(psa_jpake_state)
 defineEnum(psa_jpake_sequence)
 defineEnum(psa_crypto_driver_pake_step)
 
-const
-  PSA_CRYPTO_API_VERSION_MAJOR* = 1
-  PSA_CRYPTO_API_VERSION_MINOR* = 0
-  PSA_KEY_DERIVATION_UNLIMITED_CAPACITY* = (cast[uint]((-1)))
-
-  PSA_CRYPTO_ITS_RANDOM_SEED_UID* = 0xFFFFFF52
-  MBEDTLS_PSA_KEY_SLOT_COUNT* = 32
-  PSA_KEY_TYPE_DSA_PUBLIC_KEY* = (cast[psa_key_type_t](0x00004002))
-  PSA_KEY_TYPE_DSA_KEY_PAIR* = (cast[psa_key_type_t](0x00007002))
-  PSA_ALG_DSA_BASE* = (cast[psa_algorithm_t](0x06000400))
-  PSA_ALG_DETERMINISTIC_DSA_BASE* = (cast[psa_algorithm_t](0x06000500))
-  PSA_DH_FAMILY_CUSTOM* = (cast[psa_dh_family_t](0x0000007E))
-  PSA_PAKE_OPERATION_STAGE_SETUP* = 0
-  PSA_PAKE_OPERATION_STAGE_COLLECT_INPUTS* = 1
-  PSA_PAKE_OPERATION_STAGE_COMPUTATION* = 2
-  MBEDTLS_PSA_KEY_ID_BUILTIN_MIN* = (cast[psa_key_id_t](0x7FFF0000))
-  MBEDTLS_PSA_KEY_ID_BUILTIN_MAX* = (cast[psa_key_id_t](0x7FFFEFFF))
-  PSA_ALG_CATEGORY_PAKE* = (cast[psa_algorithm_t](0x0A000000))
-  PSA_ALG_JPAKE* = (cast[psa_algorithm_t](0x0A000100))
-  PSA_PAKE_ROLE_NONE* = (cast[psa_pake_role_t](0x00000000))
-  PSA_PAKE_ROLE_FIRST* = (cast[psa_pake_role_t](0x00000001))
-  PSA_PAKE_ROLE_SECOND* = (cast[psa_pake_role_t](0x00000002))
-  PSA_PAKE_ROLE_CLIENT* = (cast[psa_pake_role_t](0x00000011))
-  PSA_PAKE_ROLE_SERVER* = (cast[psa_pake_role_t](0x00000012))
-  PSA_PAKE_PRIMITIVE_TYPE_ECC* = (cast[psa_pake_primitive_type_t](0x00000001))
-  PSA_PAKE_PRIMITIVE_TYPE_DH* = (cast[psa_pake_primitive_type_t](0x00000002))
-  PSA_PAKE_STEP_KEY_SHARE* = (cast[psa_pake_step_t](0x00000001))
-  PSA_PAKE_STEP_ZK_PUBLIC* = (cast[psa_pake_step_t](0x00000002))
-  PSA_PAKE_STEP_ZK_PROOF* = (cast[psa_pake_step_t](0x00000003))
-  PSA_PAKE_OUTPUT_MAX_SIZE* = 65
-  PSA_PAKE_INPUT_MAX_SIZE* = 65
-  PSA_PAKE_STEP_INVALID* = (0).psa_jpake_step
-  PSA_PAKE_STEP_X1_X2* = (1).psa_jpake_step
-  PSA_PAKE_STEP_X2S* = (2).psa_jpake_step
-  PSA_PAKE_STEP_DERIVE* = (3).psa_jpake_step
-  PSA_PAKE_STATE_INVALID* = (0).psa_jpake_state
-  PSA_PAKE_STATE_SETUP* = (1).psa_jpake_state
-  PSA_PAKE_STATE_READY* = (2).psa_jpake_state
-  PSA_PAKE_OUTPUT_X1_X2* = (3).psa_jpake_state
-  PSA_PAKE_OUTPUT_X2S* = (4).psa_jpake_state
-  PSA_PAKE_INPUT_X1_X2* = (5).psa_jpake_state
-  PSA_PAKE_INPUT_X4S* = (6).psa_jpake_state
-  PSA_PAKE_SEQ_INVALID* = (0).psa_jpake_sequence
-  PSA_PAKE_X1_STEP_KEY_SHARE* = (1).psa_jpake_sequence
-  PSA_PAKE_X1_STEP_ZK_PUBLIC* = (2).psa_jpake_sequence
-  PSA_PAKE_X1_STEP_ZK_PROOF* = (3).psa_jpake_sequence
-  PSA_PAKE_X2_STEP_KEY_SHARE* = (4).psa_jpake_sequence
-  PSA_PAKE_X2_STEP_ZK_PUBLIC* = (5).psa_jpake_sequence
-  PSA_PAKE_X2_STEP_ZK_PROOF* = (6).psa_jpake_sequence
-  PSA_PAKE_SEQ_END* = (7).psa_jpake_sequence
-  PSA_JPAKE_STEP_INVALID* = (0).psa_crypto_driver_pake_step
-  PSA_JPAKE_X1_STEP_KEY_SHARE* = (1).psa_crypto_driver_pake_step
-  PSA_JPAKE_X1_STEP_ZK_PUBLIC* = (2).psa_crypto_driver_pake_step
-  PSA_JPAKE_X1_STEP_ZK_PROOF* = (3).psa_crypto_driver_pake_step
-  PSA_JPAKE_X2_STEP_KEY_SHARE* = (4).psa_crypto_driver_pake_step
-  PSA_JPAKE_X2_STEP_ZK_PUBLIC* = (5).psa_crypto_driver_pake_step
-  PSA_JPAKE_X2_STEP_ZK_PROOF* = (6).psa_crypto_driver_pake_step
-  PSA_JPAKE_X2S_STEP_KEY_SHARE* = (7).psa_crypto_driver_pake_step
-  PSA_JPAKE_X2S_STEP_ZK_PUBLIC* = (8).psa_crypto_driver_pake_step
-  PSA_JPAKE_X2S_STEP_ZK_PROOF* = (9).psa_crypto_driver_pake_step
-  PSA_JPAKE_X4S_STEP_KEY_SHARE* = (10).psa_crypto_driver_pake_step
-  PSA_JPAKE_X4S_STEP_ZK_PUBLIC* = (11).psa_crypto_driver_pake_step
-  PSA_JPAKE_X4S_STEP_ZK_PROOF* = (12).psa_crypto_driver_pake_step
-
 type
   psa_hash_operation_t*  = psa_hash_operation_s
   psa_mac_operation_t* = psa_mac_operation_s
@@ -170,6 +106,70 @@ type
     private_stage*: uint8
     private_computation_stage*: Union_crypto_extrah1
     private_data*: Union_crypto_extrah2
+
+const
+  PSA_CRYPTO_API_VERSION_MAJOR* = 1
+  PSA_CRYPTO_API_VERSION_MINOR* = 0
+  PSA_KEY_DERIVATION_UNLIMITED_CAPACITY* = (cast[uint]((-1)))
+
+  PSA_CRYPTO_ITS_RANDOM_SEED_UID* = 0xFFFFFF52
+  MBEDTLS_PSA_KEY_SLOT_COUNT* = 32
+  PSA_KEY_TYPE_DSA_PUBLIC_KEY* = (cast[psa_key_type_t](0x00004002))
+  PSA_KEY_TYPE_DSA_KEY_PAIR* = (cast[psa_key_type_t](0x00007002))
+  PSA_ALG_DSA_BASE* = (cast[psa_algorithm_t](0x06000400))
+  PSA_ALG_DETERMINISTIC_DSA_BASE* = (cast[psa_algorithm_t](0x06000500))
+  PSA_DH_FAMILY_CUSTOM* = (cast[psa_dh_family_t](0x0000007E))
+  PSA_PAKE_OPERATION_STAGE_SETUP* = 0
+  PSA_PAKE_OPERATION_STAGE_COLLECT_INPUTS* = 1
+  PSA_PAKE_OPERATION_STAGE_COMPUTATION* = 2
+  MBEDTLS_PSA_KEY_ID_BUILTIN_MIN* = (cast[psa_key_id_t](0x7FFF0000))
+  MBEDTLS_PSA_KEY_ID_BUILTIN_MAX* = (cast[psa_key_id_t](0x7FFFEFFF))
+  PSA_ALG_CATEGORY_PAKE* = (cast[psa_algorithm_t](0x0A000000))
+  PSA_ALG_JPAKE* = (cast[psa_algorithm_t](0x0A000100))
+  PSA_PAKE_ROLE_NONE* = (cast[psa_pake_role_t](0x00000000))
+  PSA_PAKE_ROLE_FIRST* = (cast[psa_pake_role_t](0x00000001))
+  PSA_PAKE_ROLE_SECOND* = (cast[psa_pake_role_t](0x00000002))
+  PSA_PAKE_ROLE_CLIENT* = (cast[psa_pake_role_t](0x00000011))
+  PSA_PAKE_ROLE_SERVER* = (cast[psa_pake_role_t](0x00000012))
+  PSA_PAKE_PRIMITIVE_TYPE_ECC* = (cast[psa_pake_primitive_type_t](0x00000001))
+  PSA_PAKE_PRIMITIVE_TYPE_DH* = (cast[psa_pake_primitive_type_t](0x00000002))
+  PSA_PAKE_STEP_KEY_SHARE* = (cast[psa_pake_step_t](0x00000001))
+  PSA_PAKE_STEP_ZK_PUBLIC* = (cast[psa_pake_step_t](0x00000002))
+  PSA_PAKE_STEP_ZK_PROOF* = (cast[psa_pake_step_t](0x00000003))
+  PSA_PAKE_OUTPUT_MAX_SIZE* = 65
+  PSA_PAKE_INPUT_MAX_SIZE* = 65
+  PSA_PAKE_STEP_INVALID* = (0).psa_jpake_step
+  PSA_PAKE_STEP_X1_X2* = (1).psa_jpake_step
+  PSA_PAKE_STEP_X2S* = (2).psa_jpake_step
+  PSA_PAKE_STEP_DERIVE* = (3).psa_jpake_step
+  PSA_PAKE_STATE_INVALID* = (0).psa_jpake_state
+  PSA_PAKE_STATE_SETUP* = (1).psa_jpake_state
+  PSA_PAKE_STATE_READY* = (2).psa_jpake_state
+  PSA_PAKE_OUTPUT_X1_X2* = (3).psa_jpake_state
+  PSA_PAKE_OUTPUT_X2S* = (4).psa_jpake_state
+  PSA_PAKE_INPUT_X1_X2* = (5).psa_jpake_state
+  PSA_PAKE_INPUT_X4S* = (6).psa_jpake_state
+  PSA_PAKE_SEQ_INVALID* = (0).psa_jpake_sequence
+  PSA_PAKE_X1_STEP_KEY_SHARE* = (1).psa_jpake_sequence
+  PSA_PAKE_X1_STEP_ZK_PUBLIC* = (2).psa_jpake_sequence
+  PSA_PAKE_X1_STEP_ZK_PROOF* = (3).psa_jpake_sequence
+  PSA_PAKE_X2_STEP_KEY_SHARE* = (4).psa_jpake_sequence
+  PSA_PAKE_X2_STEP_ZK_PUBLIC* = (5).psa_jpake_sequence
+  PSA_PAKE_X2_STEP_ZK_PROOF* = (6).psa_jpake_sequence
+  PSA_PAKE_SEQ_END* = (7).psa_jpake_sequence
+  PSA_JPAKE_STEP_INVALID* = (0).psa_crypto_driver_pake_step
+  PSA_JPAKE_X1_STEP_KEY_SHARE* = (1).psa_crypto_driver_pake_step
+  PSA_JPAKE_X1_STEP_ZK_PUBLIC* = (2).psa_crypto_driver_pake_step
+  PSA_JPAKE_X1_STEP_ZK_PROOF* = (3).psa_crypto_driver_pake_step
+  PSA_JPAKE_X2_STEP_KEY_SHARE* = (4).psa_crypto_driver_pake_step
+  PSA_JPAKE_X2_STEP_ZK_PUBLIC* = (5).psa_crypto_driver_pake_step
+  PSA_JPAKE_X2_STEP_ZK_PROOF* = (6).psa_crypto_driver_pake_step
+  PSA_JPAKE_X2S_STEP_KEY_SHARE* = (7).psa_crypto_driver_pake_step
+  PSA_JPAKE_X2S_STEP_ZK_PUBLIC* = (8).psa_crypto_driver_pake_step
+  PSA_JPAKE_X2S_STEP_ZK_PROOF* = (9).psa_crypto_driver_pake_step
+  PSA_JPAKE_X4S_STEP_KEY_SHARE* = (10).psa_crypto_driver_pake_step
+  PSA_JPAKE_X4S_STEP_ZK_PUBLIC* = (11).psa_crypto_driver_pake_step
+  PSA_JPAKE_X4S_STEP_ZK_PROOF* = (12).psa_crypto_driver_pake_step
 
 proc psa_crypto_init*(): psa_status_t {.importc, cdecl.}
 proc psa_key_attributes_init*(): psa_key_attributes_t {.importc, cdecl.}
