@@ -408,9 +408,9 @@ type
     private_f_vrfy*: proc (a1: pointer; a2: ptr mbedtls_x509_crt; a3: cint;
                            a4: ptr uint32): cint {.cdecl.}
     private_p_vrfy*: pointer
-    private_f_send*: ptr mbedtls_ssl_send_t
-    private_f_recv*: ptr mbedtls_ssl_recv_t
-    private_f_recv_timeout*: ptr mbedtls_ssl_recv_timeout_t
+    private_f_send*: mbedtls_ssl_send_t
+    private_f_recv*: mbedtls_ssl_recv_t
+    private_f_recv_timeout*: mbedtls_ssl_recv_timeout_t
     private_p_bio*: pointer
     private_session_in*: ptr mbedtls_ssl_session
     private_session_out*: ptr mbedtls_ssl_session
@@ -422,8 +422,8 @@ type
     private_transform*: ptr mbedtls_ssl_transform
     private_transform_negotiate*: ptr mbedtls_ssl_transform
     private_p_timer*: pointer
-    private_f_set_timer*: ptr mbedtls_ssl_set_timer_t
-    private_f_get_timer*: ptr mbedtls_ssl_get_timer_t
+    private_f_set_timer*: mbedtls_ssl_set_timer_t
+    private_f_get_timer*: mbedtls_ssl_get_timer_t
     private_in_buf*: ptr byte
     private_in_ctr*: ptr byte
     private_in_hdr*: ptr byte
@@ -469,7 +469,7 @@ type
     private_own_cid*: array[32, byte]
     private_own_cid_len*: uint8
     private_negotiate_cid*: uint8
-    private_f_export_keys*: ptr mbedtls_ssl_export_keys_t
+    private_f_export_keys*: mbedtls_ssl_export_keys_t
     private_p_export_keys*: pointer
     private_user_data*: mbedtls_ssl_user_data_t
 
@@ -495,8 +495,8 @@ type
     private_p_dbg*: pointer
     private_f_rng*: proc (a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.}
     private_p_rng*: pointer
-    private_f_get_cache*: ptr mbedtls_ssl_cache_get_t
-    private_f_set_cache*: ptr mbedtls_ssl_cache_set_t
+    private_f_get_cache*: mbedtls_ssl_cache_get_t
+    private_f_set_cache*: mbedtls_ssl_cache_set_t
     private_p_cache*: pointer
     private_f_sni*: proc (a1: pointer; a2: ptr mbedtls_ssl_context;
                           a3: ptr byte; a4: uint): cint {.cdecl.}
@@ -616,9 +616,9 @@ proc mbedtls_ssl_conf_dbg*(conf: ptr mbedtls_ssl_config; f_dbg: proc (
     a1: pointer; a2: cint; a3: cstring; a4: cint; a5: cstring) {.cdecl.};
                            p_dbg: pointer) {.importc, cdecl.}
 proc mbedtls_ssl_set_bio*(ssl: ptr mbedtls_ssl_context; p_bio: pointer;
-                          f_send: ptr mbedtls_ssl_send_t;
-                          f_recv: ptr mbedtls_ssl_recv_t;
-                          f_recv_timeout: ptr mbedtls_ssl_recv_timeout_t) {.
+                          f_send: mbedtls_ssl_send_t;
+                          f_recv: mbedtls_ssl_recv_t;
+                          f_recv_timeout: mbedtls_ssl_recv_timeout_t) {.
     importc, cdecl.}
 proc mbedtls_ssl_set_cid*(ssl: ptr mbedtls_ssl_context; enable: cint;
                           own_cid: ptr byte; own_cid_len: uint): cint {.
@@ -639,17 +639,17 @@ proc mbedtls_ssl_conf_read_timeout*(conf: ptr mbedtls_ssl_config;
 proc mbedtls_ssl_check_record*(ssl: ptr mbedtls_ssl_context; buf: ptr byte;
                                buflen: uint): cint {.importc, cdecl.}
 proc mbedtls_ssl_set_timer_cb*(ssl: ptr mbedtls_ssl_context; p_timer: pointer;
-                               f_set_timer: ptr mbedtls_ssl_set_timer_t;
-                               f_get_timer: ptr mbedtls_ssl_get_timer_t) {.
+                               f_set_timer: mbedtls_ssl_set_timer_t;
+                               f_get_timer: mbedtls_ssl_get_timer_t) {.
     importc, cdecl.}
 proc mbedtls_ssl_conf_session_tickets_cb*(conf: ptr mbedtls_ssl_config;
-    f_ticket_write: ptr mbedtls_ssl_ticket_write_t;
-    f_ticket_parse: ptr mbedtls_ssl_ticket_parse_t; p_ticket: pointer) {.
+    f_ticket_write: mbedtls_ssl_ticket_write_t;
+    f_ticket_parse: mbedtls_ssl_ticket_parse_t; p_ticket: pointer) {.
     importc, cdecl.}
-proc mbedtls_ssl_set_export_keys_cb*(ssl: ptr mbedtls_ssl_context; f_export_keys: ptr mbedtls_ssl_export_keys_t;
+proc mbedtls_ssl_set_export_keys_cb*(ssl: ptr mbedtls_ssl_context; f_export_keys: mbedtls_ssl_export_keys_t;
                                      p_export_keys: pointer) {.importc, cdecl.}
-proc mbedtls_ssl_conf_dtls_cookies*(conf: ptr mbedtls_ssl_config; f_cookie_write: ptr mbedtls_ssl_cookie_write_t;
-    f_cookie_check: ptr mbedtls_ssl_cookie_check_t; p_cookie: pointer) {.
+proc mbedtls_ssl_conf_dtls_cookies*(conf: ptr mbedtls_ssl_config; f_cookie_write: mbedtls_ssl_cookie_write_t;
+    f_cookie_check: mbedtls_ssl_cookie_check_t; p_cookie: pointer) {.
     importc, cdecl.}
 proc mbedtls_ssl_set_client_transport_id*(ssl: ptr mbedtls_ssl_context;
     info: ptr byte; ilen: uint): cint {.importc, cdecl.}
@@ -663,8 +663,8 @@ proc mbedtls_ssl_conf_handshake_timeout*(conf: ptr mbedtls_ssl_config;
     min: uint32; max: uint32) {.importc, cdecl.}
 proc mbedtls_ssl_conf_session_cache*(conf: ptr mbedtls_ssl_config;
                                      p_cache: pointer;
-                                     f_get_cache: ptr mbedtls_ssl_cache_get_t;
-                                     f_set_cache: ptr mbedtls_ssl_cache_set_t) {.
+                                     f_get_cache: mbedtls_ssl_cache_get_t;
+                                     f_set_cache: mbedtls_ssl_cache_set_t) {.
     importc, cdecl.}
 proc mbedtls_ssl_set_session*(ssl: ptr mbedtls_ssl_context;
                               session: ptr mbedtls_ssl_session): cint {.importc,

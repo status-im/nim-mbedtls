@@ -29,7 +29,7 @@ type
     mbedtls_error*: int16
 
 var
-  mbedtls_psa_get_random* {.importc.}: ptr mbedtls_f_rng_t
+  mbedtls_psa_get_random* {.importc.}: mbedtls_f_rng_t
   mbedtls_psa_random_state* {.importc.}: ptr mbedtls_psa_drbg_context_t
   psa_to_lms_errors* {.importc.}: array[3, mbedtls_error_pair_t]
   psa_to_pk_rsa_errors* {.importc.}: array[8, mbedtls_error_pair_t]
