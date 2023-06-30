@@ -173,14 +173,14 @@ import error
 import rsa
 import ecp
 
-template mb_pk_rsa(pk: mbedtls_pk_context): mbedtls_rsa_context =
+template mb_pk_rsa*(pk: mbedtls_pk_context): mbedtls_rsa_context =
   return case mbedtls_pk_get_type(addr pk):
     of MBEDTLS_PK_RSA:
       (cast[ptr mbedtls_rsa_context](pk.private_pk_ctx))[]
     else:
       nil
 
-template mb_pk_ec(pk: mbedtls_pk_context): mbedtls_ecp_keypair =
+template mb_pk_ec*(pk: mbedtls_pk_context): mbedtls_ecp_keypair =
   return case mbedtls_pk_get_type(addr pk):
     of MBEDTLS_PK_ECKEY, MBEDTLS_PK_ECKEY_DH, MBEDTLS_PK_ECDSA:
       (cast[ptr mbedtls_ecp_keypair](pk.private_pk_ctx))[]
