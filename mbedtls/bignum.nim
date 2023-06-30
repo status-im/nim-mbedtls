@@ -142,3 +142,14 @@ proc mbedtls_mpi_gen_prime*(X: ptr mbedtls_mpi; nbits: uint; flags: cint; f_rng:
     importc, cdecl.}
 proc mbedtls_mpi_self_test*(verbose: cint): cint {.importc, cdecl.}
 {.pop.}
+
+import "error"
+
+template mb_mpi_init*(X: mbedtls_mpi) =
+  mbedtls_mpi_init(addr X)
+template mb_mpi_read_string*(X: mbedtls_mpi, radix: int): string =
+  var buf = newString(radix)
+  let ret = mbedtls_mpi_read_string(addr X, radix.cint, buf.cstring)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+  return buf

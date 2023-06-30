@@ -62,3 +62,6 @@ proc mbedtls_entropy_update_seed_file*(ctx: ptr mbedtls_entropy_context;
                                        path: cstring): cint {.importc, cdecl.}
 proc mbedtls_entropy_self_test*(verbose: cint): cint {.importc, cdecl.}
 {.pop.}
+
+template mb_entropy_init*(ctx: mbedtls_entropy_context) =
+  mbedtls_entropy_init(addr ctx)

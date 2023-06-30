@@ -71,3 +71,16 @@ proc mbedtls_ctr_drbg_update_seed_file*(ctx: ptr mbedtls_ctr_drbg_context;
                                         path: cstring): cint {.importc, cdecl.}
 proc mbedtls_ctr_drbg_self_test*(verbose: cint): cint {.importc, cdecl.}
 {.pop.}
+
+import "error"
+
+template mb_ctr_drbg_init*(ctx: mbedtls_ctr_drbg_context) =
+  mb_ctr_drbg_init(addr ctx)
+template mb_ctr_drbg_seed*(ctx: mbedtls_ctr_drbg_context,
+           f_entropy: proc (a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.},
+           p_entropy: mbedtls_entropy_context, custom: ptr byte, len: uint) =
+  let ret = mbedtls_ctr_drbg_seed(addr ctx, f_entropy,
+                                  cast[pointer](addr p_entropy),
+                                  custom, len)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

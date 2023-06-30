@@ -819,3 +819,51 @@ proc mbedtls_ssl_tls_prf*(prf: mbedtls_tls_prf_types; secret: ptr byte;
                           rlen: uint; dstbuf: ptr byte; dlen: uint): cint {.
     importc, cdecl.}
 {.pop.}
+
+import "error"
+import "ctr_drbg"
+
+template mb_ssl_init(ssl: mbedtls_ssl_context) =
+  mbedtls_ssl_init(addr ssl)
+template mb_ssl_config_init(conf: mbedtls_ssl_config) =
+  mbedtls_ssl_config_init(addr conf)
+template mb_ssl_config_defaults*(conf: mbedtls_ssl_config, endpoint: int,
+                                 transport: int, preset: int) =
+  let ret = mbedtls_ssl_config_defaults(addr conf,
+                  endpoint.cint, transport.cint, preset.cint)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_conf_rng*(conf: mbedtls_ssl_config,
+            f_rng: proc (a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.},
+            p_rng: mbedtls_ctr_drbg_context) =
+  mbedtls_ssl_conf_rng(addr conf, f_rng, cast[pointer](addr p_rng))
+template mb_ssl_conf_read_timeout*(conf: mbedtls_ssl_config, timeout: uint32) =
+  mbedtls_ssl_conf_read_timeout(addr conf, timeout)
+template mb_ssl_conf_ca_chain*(conf: mbedtls_ssl_config,
+                                ca_chain: ptr mbedtls_x509_crt,
+                                ca_crl: ptr mbedtls_x509_crl) =
+  mbedtls_ssl_conf_ca_chain(addr conf, ca_chain, ca_crl)
+template mb_ssl_conf_own_cert*(conf: mbedtls_ssl_config,
+                               own_cert: mbedtls_x509_crt,
+                               pk_key: mbedtls_pk_context) =
+  let ret = mbedtls_ssl_conf_own_cert(addr conf, addr own_cert, addr pk_key)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_setup*(ssl: mbedtls_ssl_context, conf: mbedtls_ssl_config) =
+  let ret = mbedtls_ssl_setup(addr ssl, addr conf)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_session_reset*(ssl: mbedtls_ssl_context) =
+  let ret = mbedtls_ssl_session_reset(addr ssl)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_set_bio*(ssl: mbedtls_ssl_context, p_bio: pointer,
+                          f_send: mbedtls_ssl_send_t,
+                          f_recv: mbedtls_ssl_recv_t,
+                          f_recv_timeout: mbedtls_ssl_recv_timeout_t) =
+  mbedtls_ssl_set_bio(addr ssl, p_bio, # /!\ TODO check memory because it might be wrong here
+                      f_send, f_recv, f_recv_timeout)
+template mb_ssl_handshake(ssl: mbedtls_ssl_context) =
+  let ret = mbedtls_ssl_handshake(addr self.ssl)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

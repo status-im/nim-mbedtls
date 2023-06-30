@@ -192,3 +192,62 @@ proc mbedtls_x509write_crt_pem*(ctx: ptr mbedtls_x509write_cert;
     a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.}; p_rng: pointer): cint {.
     importc, cdecl.}
 {.pop.}
+
+import "error"
+import "ctr_drbg"
+
+template mb_x509write_crt_init*(ctx: mbedtls_x509write_cert) =
+  mbedtls_x509write_crt_init(addr ctx)
+template mb_x509write_crt_set_md_alg*(ctx: mbedtls_x509write_cert, md_alg: mbedtls_md_type_t) =
+  mbedtls_x509write_crt_set_md_alg(addr ctx, md_alg)
+template mb_x509write_crt_set_subject_key*(ctx: mbedtls_x509write_cert, key: mbedtls_pk_context) =
+  mbedtls_x509write_crt_set_subject_key(addr ctx, key)
+template mb_x509write_crt_set_issuer_key*(ctx: mbedtls_x509write_cert, key: mbedtls_pk_context) =
+  mbedtls_x509write_crt_set_issuer_key(addr ctx, key)
+template mb_x509write_crt_set_subject_name*(ctx: mbedtls_x509write_cert, name: string) =
+  let ret = mbedtls_x509write_crt_set_subject_name(addr ctx, name.cstring)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_x509write_crt_set_issuer_name*(ctx: mbedtls_x509write_cert, name: string) =
+  let ret = mbedtls_x509write_crt_set_issuer_name(addr ctx, name.cstring)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_x509write_crt_set_validity*(ctx: mbedtls_x509write_cert,
+                                    not_before: string, not_after: string) =
+  let ret = mbedtls_x509write_crt_set_validity(addr ctx, not_before.cstring, not_after.cstring)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+proc mb_x509write_crt_set_basic_constraints*(ctx: mbedtls_x509write_cert,
+                                        is_ca: int; max_pathlen: int) =
+  let ret = mbedtls_x509write_crt_set_basic_constraints(addr ctx, is_ca.cint, max_pathlen.cint)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_x509write_crt_set_subject_key_identifier*(ctx: mbedtls_x509write_cert) =
+  let ret = mbedtls_x509write_crt_set_subject_key_identifier(addr ctx)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_x509write_crt_set_authority_key_identifier*(ctx: mbedtls_x509write_cert) =
+  let ret = mbedtls_x509write_crt_set_authority_key_identifier(addr ctx)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_x509write_crt_set_serial*(ctx: mbedtls_x509write_cert, serial: mbedtls_mpi) =
+  let ret = mbedtls_x509write_crt_set_serial(addr ctx, addr serial)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_x509write_crt_pem*(ctx: mbedtls_x509write_cert, size: uint,
+                            f_rng: proc (a1: pointer; a2: ptr byte; a3: uint): cint,
+                            p_rng: mbedtls_ctr_drbg_context): string =
+  var buf = newString(size)
+  let ret = mbedtls_x509write_crt_pem(addr ctx, cast[ptr byte](buf.cstring), size,
+                                      f_rng, cast[pointer](addr p_rng))
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+  return buf
+template mb_x509_crt_parse*(chain: mbedtls_x509_crt, buf: string) =
+  let
+    bufcstring = buf.cstring
+    ret = mbedtls_x509_crt_parse(addr chain,
+                                 cast[ptr byte](bufcstring),
+                                 bucstring.len().uint + 1)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

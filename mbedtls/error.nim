@@ -8,6 +8,9 @@ import "csources"
 
 {.experimental: "codeReordering".}
 
+type
+  MbedTLSError* = object of CatchableError
+
 const
   MBEDTLS_ERR_ERROR_GENERIC_ERROR* = -0x00000001
   MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED* = -0x0000006E

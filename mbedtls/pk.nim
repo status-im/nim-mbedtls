@@ -14,8 +14,6 @@ import "utils"
 
 # const 'MBEDTLS_PK_SIGNATURE_MAX_SIZE' has unsupported value 'MBEDTLS_MPI_MAX_SIZE'
 # proc 'mbedtls_pk_get_len' skipped - static inline procs cannot work with '--noHeader | -H'
-# proc 'mbedtls_pk_rsa' skipped - static inline procs cannot work with '--noHeader | -H'
-# proc 'mbedtls_pk_ec' skipped - static inline procs cannot work with '--noHeader | -H'
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
@@ -170,3 +168,32 @@ proc mbedtls_pk_write_pubkey*(p: ptr ptr byte; start: ptr byte;
 proc mbedtls_pk_load_file*(path: cstring; buf: ptr ptr byte; n: ptr uint): cint {.
     importc, cdecl.}
 {.pop.}
+
+import error
+import rsa
+import ecp
+
+template mb_pk_rsa(pk: mbedtls_pk_context): mbedtls_rsa_context =
+  return case mbedtls_pk_get_type(addr pk):
+    of MBEDTLS_PK_RSA:
+      (cast[ptr mbedtls_rsa_context](pk.private_pk_ctx))[]
+    else:
+      nil
+
+template mb_pk_ec(pk: mbedtls_pk_context): mbedtls_ecp_keypair =
+  return case mbedtls_pk_get_type(addr pk):
+    of MBEDTLS_PK_ECKEY, MBEDTLS_PK_ECKEY_DH, MBEDTLS_PK_ECDSA:
+      (cast[ptr mbedtls_ecp_keypair](pk.private_pk_ctx))[]
+    else:
+      nil
+
+template mb_pk_init*(ctx: mbedtls_pk_context) =
+  mbedtls_pk_init(addr ctx)
+
+template mb_pk_setup*(ctx: mbedtls_pk_context, info: mbedtls_pk_info_t) =
+  let ret = mbedtls_pk_init(addr ctx, addr info)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+
+template mb_pk_info_from_type*(pk_type: mbedtls_pk_type_t): mbedtls_pk_info_t =
+  return mbedtls_pk_info_from_type(pk_type)[]
