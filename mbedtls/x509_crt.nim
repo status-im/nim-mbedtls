@@ -217,7 +217,7 @@ template mb_x509write_crt_set_validity*(ctx: mbedtls_x509write_cert,
   let ret = mbedtls_x509write_crt_set_validity(addr ctx, not_before.cstring, not_after.cstring)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
-proc mb_x509write_crt_set_basic_constraints*(ctx: mbedtls_x509write_cert,
+template mb_x509write_crt_set_basic_constraints*(ctx: mbedtls_x509write_cert,
                                         is_ca: int; max_pathlen: int) =
   let ret = mbedtls_x509write_crt_set_basic_constraints(addr ctx, is_ca.cint, max_pathlen.cint)
   if ret != 0:
