@@ -864,6 +864,6 @@ template mb_ssl_set_bio*(ssl: mbedtls_ssl_context, p_bio: pointer,
   mbedtls_ssl_set_bio(addr ssl, p_bio, # /!\ TODO check memory because it might be wrong here
                       f_send, f_recv, f_recv_timeout)
 template mb_ssl_handshake*(ssl: mbedtls_ssl_context) =
-  let ret = mbedtls_ssl_handshake(addr self.ssl)
+  let ret = mbedtls_ssl_handshake(addr ssl)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

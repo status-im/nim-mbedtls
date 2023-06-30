@@ -75,7 +75,7 @@ proc mbedtls_ctr_drbg_self_test*(verbose: cint): cint {.importc, cdecl.}
 import "error"
 
 template mb_ctr_drbg_init*(ctx: mbedtls_ctr_drbg_context) =
-  mb_ctr_drbg_init(addr ctx)
+  mbedtls_ctr_drbg_init(addr ctx)
 template mb_ctr_drbg_seed*(ctx: mbedtls_ctr_drbg_context,
            f_entropy: proc (a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.},
            p_entropy: mbedtls_entropy_context, custom: ptr byte, len: uint) =
