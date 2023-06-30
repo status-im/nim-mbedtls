@@ -823,9 +823,9 @@ proc mbedtls_ssl_tls_prf*(prf: mbedtls_tls_prf_types; secret: ptr byte;
 import "error"
 import "ctr_drbg"
 
-template mb_ssl_init(ssl: mbedtls_ssl_context) =
+template mb_ssl_init*(ssl: mbedtls_ssl_context) =
   mbedtls_ssl_init(addr ssl)
-template mb_ssl_config_init(conf: mbedtls_ssl_config) =
+template mb_ssl_config_init*(conf: mbedtls_ssl_config) =
   mbedtls_ssl_config_init(addr conf)
 template mb_ssl_config_defaults*(conf: mbedtls_ssl_config, endpoint: int,
                                  transport: int, preset: int) =
@@ -863,7 +863,7 @@ template mb_ssl_set_bio*(ssl: mbedtls_ssl_context, p_bio: pointer,
                           f_recv_timeout: mbedtls_ssl_recv_timeout_t) =
   mbedtls_ssl_set_bio(addr ssl, p_bio, # /!\ TODO check memory because it might be wrong here
                       f_send, f_recv, f_recv_timeout)
-template mb_ssl_handshake(ssl: mbedtls_ssl_context) =
+template mb_ssl_handshake*(ssl: mbedtls_ssl_context) =
   let ret = mbedtls_ssl_handshake(addr self.ssl)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

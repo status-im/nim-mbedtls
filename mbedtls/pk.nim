@@ -173,19 +173,18 @@ import error
 import rsa
 import ecp
 
-template mb_pk_rsa*(pk: mbedtls_pk_context): mbedtls_rsa_context =
-  return case mbedtls_pk_get_type(addr pk):
-    of MBEDTLS_PK_RSA:
-      (cast[ptr mbedtls_rsa_context](pk.private_pk_ctx))[]
-    else:
-      nil
+proc mb_pk_rsa*(pk: mbedtls_pk_context): ptr mbedtls_rsa_context =
+  var ctx = pk
+  if mbedtls_pk_get_type(addr ctx) != MBEDTLS_PK_RSA:
+    raise newException(MbedTLSError, "PK - Not a RSA Context")
+  return cast[ptr mbedtls_rsa_context](pk.private_pk_ctx)
 
-template mb_pk_ec*(pk: mbedtls_pk_context): mbedtls_ecp_keypair =
-  return case mbedtls_pk_get_type(addr pk):
-    of MBEDTLS_PK_ECKEY, MBEDTLS_PK_ECKEY_DH, MBEDTLS_PK_ECDSA:
-      (cast[ptr mbedtls_ecp_keypair](pk.private_pk_ctx))[]
-    else:
-      nil
+proc mb_pk_ec*(pk: mbedtls_pk_context): ptr mbedtls_ecp_keypair =
+  var ctx = pk
+  let typ = mbedtls_pk_get_type(addr ctx)
+  if typ != MBEDTLS_PK_ECKEY and typ != MBEDTLS_PK_ECKEY_DH and typ != MBEDTLS_PK_ECDSA:
+    raise newException(MbedTLSError, "PK - Not a EC Context")
+  return cast[ptr mbedtls_ecp_keypair](pk.private_pk_ctx)
 
 template mb_pk_init*(ctx: mbedtls_pk_context) =
   mbedtls_pk_init(addr ctx)
@@ -196,4 +195,4 @@ template mb_pk_setup*(ctx: mbedtls_pk_context, info: mbedtls_pk_info_t) =
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
 
 template mb_pk_info_from_type*(pk_type: mbedtls_pk_type_t): mbedtls_pk_info_t =
-  return mbedtls_pk_info_from_type(pk_type)[]
+  mbedtls_pk_info_from_type(pk_type)[]

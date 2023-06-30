@@ -201,9 +201,9 @@ template mb_x509write_crt_init*(ctx: mbedtls_x509write_cert) =
 template mb_x509write_crt_set_md_alg*(ctx: mbedtls_x509write_cert, md_alg: mbedtls_md_type_t) =
   mbedtls_x509write_crt_set_md_alg(addr ctx, md_alg)
 template mb_x509write_crt_set_subject_key*(ctx: mbedtls_x509write_cert, key: mbedtls_pk_context) =
-  mbedtls_x509write_crt_set_subject_key(addr ctx, key)
+  mbedtls_x509write_crt_set_subject_key(addr ctx, addr key)
 template mb_x509write_crt_set_issuer_key*(ctx: mbedtls_x509write_cert, key: mbedtls_pk_context) =
-  mbedtls_x509write_crt_set_issuer_key(addr ctx, key)
+  mbedtls_x509write_crt_set_issuer_key(addr ctx, addr key)
 template mb_x509write_crt_set_subject_name*(ctx: mbedtls_x509write_cert, name: string) =
   let ret = mbedtls_x509write_crt_set_subject_name(addr ctx, name.cstring)
   if ret != 0:
@@ -242,12 +242,11 @@ template mb_x509write_crt_pem*(ctx: mbedtls_x509write_cert, size: uint,
                                       f_rng, cast[pointer](addr p_rng))
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
-  return buf
+  buf
 template mb_x509_crt_parse*(chain: mbedtls_x509_crt, buf: string) =
-  let
-    bufcstring = buf.cstring
-    ret = mbedtls_x509_crt_parse(addr chain,
+  var bufcstring = buf.cstring
+  let ret = mbedtls_x509_crt_parse(addr chain,
                                  cast[ptr byte](bufcstring),
-                                 bucstring.len().uint + 1)
+                                 bufcstring.len().uint + 1)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

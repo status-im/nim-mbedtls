@@ -166,9 +166,9 @@ proc mbedtls_rsa_self_test*(verbose: cint): cint {.importc, cdecl.}
 import "error"
 import "ctr_drbg"
 
-template mb_rsa_gen_key*(ctx: mbedtls_rsa_context,
+template mb_rsa_gen_key*(ctx: ptr mbedtls_rsa_context,
                       f_rng: proc (a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.},
                       p_rng: mbedtls_ctr_drbg_context; nbits: cuint, exponent: cint) =
-  let ret = mbedtls_rsa_gen_key(addr ctx, f_rng, cast[pointer](addr p_rng), nbits, exponent)
+  let ret = mbedtls_rsa_gen_key(ctx, f_rng, cast[pointer](addr p_rng), nbits, exponent)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

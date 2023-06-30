@@ -152,4 +152,4 @@ template mb_mpi_read_string*(X: mbedtls_mpi, radix: int): string =
   let ret = mbedtls_mpi_read_string(addr X, radix.cint, buf.cstring)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
-  return buf
+  buf
