@@ -45,3 +45,6 @@ proc mbedtls_ssl_cache_set_max_entries*(cache: ptr mbedtls_ssl_cache_context;
 proc mbedtls_ssl_cache_free*(cache: ptr mbedtls_ssl_cache_context) {.importc,
     cdecl.}
 {.pop.}
+
+template mb_ssl_cache_init*(cache: mbedtls_ssl_cache_context) =
+  mbedtls_ssl_cache_init(addr cache)

@@ -238,7 +238,7 @@ template mb_x509write_crt_pem*(ctx: mbedtls_x509write_cert, size: uint,
                             f_rng: proc (a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.},
                             p_rng: mbedtls_ctr_drbg_context): string =
   var buf = newString(size)
-  let ret = mbedtls_x509write_crt_pem(addr ctx, cast[ptr byte](buf.cstring), size,
+  let ret = mbedtls_x509write_crt_pem(addr ctx, cast[ptr byte](addr buf[0]), size,
                                       f_rng, cast[pointer](addr p_rng))
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))

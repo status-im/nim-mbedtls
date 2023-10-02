@@ -822,6 +822,8 @@ proc mbedtls_ssl_tls_prf*(prf: mbedtls_tls_prf_types; secret: ptr byte;
 
 import "error"
 import "ctr_drbg"
+import "ssl_cookie"
+import "timing"
 
 template mb_ssl_init*(ssl: mbedtls_ssl_context) =
   mbedtls_ssl_init(addr ssl)
@@ -849,6 +851,10 @@ template mb_ssl_conf_own_cert*(conf: mbedtls_ssl_config,
   let ret = mbedtls_ssl_conf_own_cert(addr conf, addr own_cert, addr pk_key)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_conf_dtls_cookies(conf: mbedtls_ssl_config,
+                                  cookie: mbedtls_ssl_cookie_ctx) =
+  mbedtls_ssl_conf_dtls_cookies(addr conf, mbedtls_ssl_cookie_write,
+                                mbedtls_ssl_cookie_check, addr cookie)
 template mb_ssl_setup*(ssl: mbedtls_ssl_context, conf: mbedtls_ssl_config) =
   let ret = mbedtls_ssl_setup(addr ssl, addr conf)
   if ret != 0:
@@ -863,6 +869,10 @@ template mb_ssl_set_bio*(ssl: mbedtls_ssl_context, p_bio: pointer,
                           f_recv_timeout: mbedtls_ssl_recv_timeout_t) =
   mbedtls_ssl_set_bio(addr ssl, p_bio, # /!\ TODO check memory because it might be wrong here
                       f_send, f_recv, f_recv_timeout)
+template mb_ssl_set_timer_cb*(ssl: mbedtls_ssl_context;
+                                   timer: mbedtls_timing_delay_context) =
+  mbedtls_ssl_set_timer_cb(addr ssl, cast[pointer](addr timer),
+                           mbedtls_timing_set_delay, mbedtls_timing_get_delay)
 template mb_ssl_handshake*(ssl: mbedtls_ssl_context) =
   let ret = mbedtls_ssl_handshake(addr ssl)
   if ret != 0:
