@@ -851,7 +851,7 @@ template mb_ssl_conf_own_cert*(conf: mbedtls_ssl_config,
   let ret = mbedtls_ssl_conf_own_cert(addr conf, addr own_cert, addr pk_key)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
-template mb_ssl_conf_dtls_cookies(conf: mbedtls_ssl_config,
+template mb_ssl_conf_dtls_cookies*(conf: mbedtls_ssl_config,
                                   cookie: mbedtls_ssl_cookie_ctx) =
   mbedtls_ssl_conf_dtls_cookies(addr conf, mbedtls_ssl_cookie_write,
                                 mbedtls_ssl_cookie_check, addr cookie)
