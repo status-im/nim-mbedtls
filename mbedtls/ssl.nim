@@ -877,3 +877,13 @@ template mb_ssl_handshake*(ssl: mbedtls_ssl_context) =
   let ret = mbedtls_ssl_handshake(addr ssl)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_handshake_step*(ssl: mbedtls_ssl_context): cint =
+  mbedtls_ssl_handshake_step(addr ssl)
+template mb_ssl_set_client_transport_id*(ssl: ptr mbedtls_ssl_context, ipv4: array[4, uint8]) =
+  let ret = mbedtls_ssl_set_client_transport_id(addr ssl, addr ipv4[0], 4)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_set_client_transport_id*(ssl: ptr mbedtls_ssl_context, ipv6: array[16, uint8]) =
+  let ret = mbedtls_ssl_set_client_transport_id(addr ssl, addr ipv6[0], 16)
+  if ret != 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
