@@ -855,6 +855,8 @@ template mb_ssl_conf_dtls_cookies*(conf: mbedtls_ssl_config,
                                   cookie: mbedtls_ssl_cookie_ctx) =
   mbedtls_ssl_conf_dtls_cookies(addr conf, mbedtls_ssl_cookie_write,
                                 mbedtls_ssl_cookie_check, addr cookie)
+template mb_ssl_conf_authmode*(conf: mbedtls_ssl_config, authmode: cint) =
+  mbedtls_ssl_conf_authmode(addr conf, authmode)
 template mb_ssl_setup*(ssl: mbedtls_ssl_context, conf: mbedtls_ssl_config) =
   let ret = mbedtls_ssl_setup(addr ssl, addr conf)
   if ret != 0:
@@ -887,3 +889,17 @@ template mb_ssl_set_client_transport_id*(ssl: mbedtls_ssl_context, ipv6: array[1
   let ret = mbedtls_ssl_set_client_transport_id(addr ssl, addr ipv6[0], 16)
   if ret != 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+template mb_ssl_set_verify*(ssl: mbedtls_ssl_context, f_vrfy: proc (
+    a1: pointer; a2: ptr mbedtls_x509_crt; a3: cint; a4: ptr uint32): cint {.
+    cdecl.}, p_vrfy: untyped) =
+  mbedtls_ssl_set_verify(addr ssl, verify, cast[pointer](p_vrfy))
+template mb_ssl_write*(ssl: mbedtls_ssl_context; buf: seq[byte]): int =
+  let ret = mbedtls_ssl_write(addr ssl, cast[ptr byte](addr buf[0]), buf.len().uint)
+  if ret < 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+  return ret.int
+template mb_ssl_read*(ssl: mbedtls_ssl_context; buf: seq[byte]): int =
+  let ret = mbedtls_ssl_read(addr ssl, cast[ptr byte](addr res[0]), res.len().uint)
+  if ret < 0:
+    raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
+  return ret.int
