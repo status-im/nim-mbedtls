@@ -897,9 +897,9 @@ template mb_ssl_write*(ssl: mbedtls_ssl_context; buf: seq[byte]): int =
   let ret = mbedtls_ssl_write(addr ssl, cast[ptr byte](addr buf[0]), buf.len().uint)
   if ret < 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
-  return ret.int
+  ret.int
 template mb_ssl_read*(ssl: mbedtls_ssl_context; buf: seq[byte]): int =
   let ret = mbedtls_ssl_read(addr ssl, cast[ptr byte](addr res[0]), res.len().uint)
   if ret < 0:
     raise newException(MbedTLSError, $(ret.mbedtls_high_level_strerr()))
-  return ret.int
+  ret.int
