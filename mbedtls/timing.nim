@@ -18,8 +18,8 @@ type
 proc mbedtls_timing_get_timer*(val: ptr mbedtls_timing_hr_time; reset: cint): culong {.
     importc, cdecl.}
 proc mbedtls_timing_set_delay*(data: pointer; int_ms: uint32; fin_ms: uint32) {.
-    importc, cdecl.}
-proc mbedtls_timing_get_delay*(data: pointer): cint {.importc, cdecl.}
+    importc, cdecl, gcsafe.}
+proc mbedtls_timing_get_delay*(data: pointer): cint {.importc, cdecl, gcsafe.}
 proc mbedtls_timing_get_final_delay*(data: ptr mbedtls_timing_delay_context): uint32 {.
     importc, cdecl.}
 {.pop.}
