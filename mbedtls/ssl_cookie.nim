@@ -20,7 +20,7 @@ proc mbedtls_ssl_cookie_write*(ctx: pointer; p: ptr ptr byte;
                                `end`: ptr byte; info: ptr byte;
                                ilen: uint): cint {.importc, cdecl.}
 proc mbedtls_ssl_cookie_check*(ctx: pointer; cookie: ptr byte; clen: uint;
-                               info: ptr byte; ilen: uint): cint {.importc, cdecl.}
+                               info: ptr byte; ilen: uint): cint {.importc, cdecl, gcsafe.}
 proc mbedtls_ssl_cookie_init*(ctx: ptr mbedtls_ssl_cookie_ctx) {.importc, cdecl.}
 proc mbedtls_ssl_cookie_setup*(ctx: ptr mbedtls_ssl_cookie_ctx; f_rng: proc (
     a1: pointer; a2: ptr byte; a3: uint): cint {.cdecl.}; p_rng: pointer): cint {.
