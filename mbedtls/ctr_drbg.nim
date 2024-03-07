@@ -64,7 +64,7 @@ proc mbedtls_ctr_drbg_random_with_add*(p_rng: pointer; output: ptr byte;
                                        output_len: uint; additional: ptr byte;
                                        add_len: uint): cint {.importc, cdecl.}
 proc mbedtls_ctr_drbg_random*(p_rng: pointer; output: ptr byte;
-                              output_len: uint): cint {.importc, cdecl.}
+                              output_len: uint): cint {.importc, cdecl, gcsafe.}
 proc mbedtls_ctr_drbg_write_seed_file*(ctx: ptr mbedtls_ctr_drbg_context;
                                        path: cstring): cint {.importc, cdecl.}
 proc mbedtls_ctr_drbg_update_seed_file*(ctx: ptr mbedtls_ctr_drbg_context;
