@@ -14,4 +14,8 @@ license       = "MIT or Apache License 2.0"
 
 before install:
   exec "git submodule update --init"
-  exec "make --silent -C mbedtls/csources lib"
+  exec "make --silent -C mbedtls/csources/library error.c"
+  exec "make --silent -C mbedtls/csources/library version_features.c"
+  exec "make --silent -C mbedtls/csources/library ssl_debug_helpers_generated.c"
+  # exec "make --silent -C mbedtls/csources/library psa_crypto_driver_wrappers.c"
+  # Unnecessary. Requires python `jsonschema` module
