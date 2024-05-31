@@ -21,15 +21,6 @@ def install_pip():
     if os.path.exists(get_pip_script):
       os.remove(get_pip_script)
 
-def check_and_install(package, version):
-  try:
-    pkg = __import__(package)
-    installed_version = pkg.__version__
-    if installed_version != version:
-      run_command(f"{sys.executable} -m pip --quiet install {package}=={version}")
-  except ImportError:
-    run_command(f"{sys.executable} -m pip --quiet install {package}=={version}")
-
 def main():
   try:
     subprocess.check_call([sys.executable, "-m", "pip", "--version"])
@@ -37,8 +28,10 @@ def main():
     install_pip()
 
   # Check and install Jinja2 and jsonschema
-  check_and_install("jinja2", "2.10.1")
-  check_and_install("jsonschema", "3.2.0")
+  requirements_file = os.path.join(os.path.dirname(__file__),
+          'mbedtls/csources/scripts/driver.requirements.txt')
+  run_command(f"{sys.executable} -m pip --quiet install -r {requirements_file}")
+
 
 if __name__ == "__main__":
   main()
