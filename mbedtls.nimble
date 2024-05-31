@@ -14,6 +14,9 @@ license       = "MIT or Apache License 2.0"
 
 before install:
   exec "git submodule update --init"
+  # Mbed-TLS auto-generates some code. This auto-generation needs some
+  # prerequisites python packages are required.
+  exec "python3 install_prerequisites.py"
   exec "make --silent -C mbedtls/csources/library error.c"
   exec "make --silent -C mbedtls/csources/library version_features.c"
   exec "make --silent -C mbedtls/csources/library ssl_debug_helpers_generated.c"
