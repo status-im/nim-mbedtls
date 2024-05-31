@@ -17,5 +17,4 @@ before install:
   exec "make --silent -C mbedtls/csources/library error.c"
   exec "make --silent -C mbedtls/csources/library version_features.c"
   exec "make --silent -C mbedtls/csources/library ssl_debug_helpers_generated.c"
-  # exec "make --silent -C mbedtls/csources/library psa_crypto_driver_wrappers.c"
-  # Unnecessary. Requires python `jsonschema` module
+  exec "make --silent -C mbedtls/csources/library psa_crypto_driver_wrappers.c"
