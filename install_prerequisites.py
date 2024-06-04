@@ -12,7 +12,7 @@ def run_command(command):
 def install_pip():
   get_pip_script = "get-pip.py"
   try:
-    run_command(f"curl -s https://bootstrap.pypa.io/get-pip.py -o {get_pip_script}")
+    run_command(f"curl https://bootstrap.pypa.io/get-pip.py -o {get_pip_script}")
     run_command(f"{sys.executable} {get_pip_script}")
   except Exception as e:
     print(f"Failed to install pip: {e}")
@@ -27,10 +27,9 @@ def main():
   except subprocess.CalledProcessError:
     install_pip()
 
-  # Check and install Jinja2 and jsonschema
   requirements_file = os.path.join(os.path.dirname(__file__),
           'mbedtls/csources/scripts/driver.requirements.txt')
-  run_command(f"{sys.executable} -m pip --quiet install -r {requirements_file}")
+  run_command(f"{sys.executable} -m pip install -r {requirements_file}")
 
 
 if __name__ == "__main__":
