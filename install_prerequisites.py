@@ -23,12 +23,15 @@ def install_pip():
 
 def main():
   try:
+    print("python -m pop --version")
     subprocess.check_call([sys.executable, "-m", "pip", "--version"])
   except subprocess.CalledProcessError:
+    print("install pip")
     install_pip()
 
   requirements_file = os.path.join(os.path.dirname(__file__),
           'mbedtls/csources/scripts/driver.requirements.txt')
+  print(f"{sys.executable} -m pip install -r {requirements_file}")
   run_command(f"{sys.executable} -m pip install -r {requirements_file}")
 
 
