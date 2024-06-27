@@ -11,3 +11,5 @@ const
 
 {.passc: "-I" & quoteShell(mbedtlsIncPath).}
 {.passc: "-I" & quoteShell(mbedtlsLibPath).}
+when defined windows:
+  {.passc: "-lws2_32".}
