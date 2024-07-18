@@ -1,5 +1,6 @@
 {.used.}
 import "csources"
+import "platform"
 {.compile: "./mbedtls/csources/library/error.c".}
 
 # proc 'mbedtls_error_add' skipped - static inline procs cannot work with '--noHeader | -H'
