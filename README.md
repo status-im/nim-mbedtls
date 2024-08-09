@@ -32,14 +32,6 @@ nimble install https://github.com/status-im/nim-mbedtls.git
 
 `Mbed-TLS` itself is compiled as part of your project - there is no need to install any third-party libraries.
 
-## TODO
-
-There is some things left to do. In no particular order:
-* Create a wrapper more convenient to use in Nim (ie without all the pointer cast for example)
-* Add a script to regenerate the .nim files using `c2nim` or `nimterop`
-* Add a CI with some tests
-* Add `nim-mbedtls` to the nimble packages
-
 ## License
 
 Licensed and distributed under either of
