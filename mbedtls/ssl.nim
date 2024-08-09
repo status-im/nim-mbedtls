@@ -891,7 +891,7 @@ template mb_ssl_set_client_transport_id*(ssl: mbedtls_ssl_context, ipv6: array[1
 template mb_ssl_set_verify*(ssl: mbedtls_ssl_context, f_vrfy: proc (
     a1: pointer; a2: ptr mbedtls_x509_crt; a3: cint; a4: ptr uint32): cint {.
     cdecl.}, p_vrfy: untyped) =
-  mbedtls_ssl_set_verify(addr ssl, verify, cast[pointer](p_vrfy))
+  mbedtls_ssl_set_verify(addr ssl, f_vrfy, cast[pointer](p_vrfy))
 template mb_ssl_write*(ssl: mbedtls_ssl_context; buf: seq[byte]): int =
   let ret = mbedtls_ssl_write(addr ssl, cast[ptr byte](addr buf[0]), buf.len().uint)
   if ret < 0:
