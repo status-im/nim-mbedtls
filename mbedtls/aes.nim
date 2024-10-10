@@ -4,6 +4,7 @@ import "platform_time"
 
 {.compile: "./mbedtls/csources/library/aes.c".}
 {.compile: "./mbedtls/csources/library/aesni.c".}
+{.compile: "./mbedtls/csources/library/aesce.c".}
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
@@ -75,4 +76,16 @@ proc mbedtls_internal_aes_decrypt*(ctx: ptr mbedtls_aes_context;
                                    output: array[16, byte]): cint {.importc,
     cdecl.}
 proc mbedtls_aes_self_test*(verbose: cint): cint {.importc, cdecl.}
+
+proc mbedtls_aesce_has_support*: cint {.importc, cdecl.}
+proc mbedtls_aesce_crypt_ecb*(ctx: ptr mbedtls_aes_context, mode: cint,
+                              input: array[16, byte],
+                              output: array[16, byte]): cint {.importc, cdecl.}
+proc mbedtls_aesce_gcm_mult*(c: array[16, byte], a: array[16, byte],
+                             b: array[16, byte]) {.importc, cdecl.}
+proc mbedtls_aesce_inverse_key*(invkey: ptr byte, fwdkey: ptr byte,
+                                nr: cint) {.importc, cdecl.}
+proc mbedtls_aesce_setkey_enc*(rk: ptr byte, key: ptr byte,
+                               bits: cuint): cint {.importc, cdecl.}
+
 {.pop.}
