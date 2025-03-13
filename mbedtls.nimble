@@ -7,17 +7,11 @@
 # those terms.
 
 packageName   = "mbedtls"
-version       = "0.0.1"
+version       = "0.0.2"
 author        = "Status Research & Development GmbH"
 description   = "Mbed-TLS wrapper in Nim"
 license       = "MIT or Apache License 2.0"
 
 before install:
   exec "git submodule update --init"
-  # Mbed-TLS auto-generates some code. This auto-generation needs some
-  # prerequisites python packages are required.
-  exec "python3 install_prerequisites.py"
-  exec "make --silent -C mbedtls/csources/library error.c"
-  exec "make --silent -C mbedtls/csources/library version_features.c"
-  exec "make --silent -C mbedtls/csources/library ssl_debug_helpers_generated.c"
-  exec "make --silent -C mbedtls/csources/library psa_crypto_driver_wrappers.c"
+  exec "cp -r generated/* mbedtls/csources/"
