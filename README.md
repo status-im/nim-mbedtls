@@ -32,6 +32,17 @@ nimble install https://github.com/status-im/nim-mbedtls.git
 
 `Mbed-TLS` itself is compiled as part of your project - there is no need to install any third-party libraries.
 
+## Updating mbedtls version
+- Assuming you have ubuntu, install the following packages
+    - `curl`
+    - `python3`
+    - `python3-venv`
+    - `build-essential`
+- Execute `git submodule update --init --recursive`
+- Update the commit in the git submodule `mbedtls/csources`
+- Execute `./build.sh`. Note that this script might fail if the makefile in `mbedtls/csources/library` changes
+
+
 ## License
 
 Licensed and distributed under either of
